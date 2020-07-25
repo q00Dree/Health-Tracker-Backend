@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HealthTracker.DAL.Contexts;
+using HealthTracker.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
-namespace HealthTracker
+namespace Qoollo
 {
     public class Startup
     {
@@ -21,19 +15,25 @@ namespace HealthTracker
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
+            services.AddCors();
+
+            services.AddScoped<IRepository<Controller>, PgControllerRepository>();
+            services.AddScoped<IRepository<Sensor>, PgSensorRepository>();
+            services.AddScoped<IUnitOfWork, PgUnitOfWork>();
+
+            var influxDb = InfluxDbClient.GetInstance();
+            influxDb.SetConfiguration(Configuration);
+
+            services.AddAutoMapper(typeof(ControllerProfile), typeof(SensorProfile));
+
             services.AddEntityFrameworkNpgsql().AddDbContext<PgDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,11 +41,11 @@ namespace HealthTracker
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {

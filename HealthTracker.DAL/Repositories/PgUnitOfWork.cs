@@ -5,7 +5,7 @@ using HealthTracker.DAL.Repositories;
 using System;
 using System.Threading.Tasks;
 
-namespace Qoollo.DAL.Repositories
+namespace HealthTracker.DAL.Repositories
 {
     public class PgUnitOfWork : IUnitOfWork
     {
