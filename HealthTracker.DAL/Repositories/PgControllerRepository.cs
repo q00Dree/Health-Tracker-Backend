@@ -1,14 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Qoollo.DAL.Contexts;
-using Qoollo.DAL.Entities;
-using Qoollo.DAL.Interfaces;
-using System;
+﻿using HealthTracker.DAL.Contexts;
+using HealthTracker.DAL.Entities;
+using HealthTracker.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Qoollo.DAL.Repositories
+namespace HealthTracker.DAL.Repositories
 {
     public class PgControllerRepository : IRepository<Controller>
     {

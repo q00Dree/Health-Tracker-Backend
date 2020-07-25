@@ -1,5 +1,10 @@
+using AutoMapper;
 using HealthTracker.DAL.Contexts;
+using HealthTracker.DAL.Entities;
+using HealthTracker.DAL.Interfaces;
+using HealthTracker.DAL.Repositories;
 using HealthTracker.Infrastructure;
+using HealthTracker.Infrastructure.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Qoollo
+namespace HealthTracker
 {
     public class Startup
     {

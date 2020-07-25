@@ -1,10 +1,8 @@
-﻿using Qoollo.DAL.Entities;
+﻿using HealthTracker.DAL.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Qoollo.DAL.Interfaces
+namespace HealthTracker.DAL.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

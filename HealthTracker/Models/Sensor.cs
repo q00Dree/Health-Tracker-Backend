@@ -1,4 +1,4 @@
-﻿using Qoollo.Infrastructure;
+﻿using HealthTracker.Infrastructure;
 using System;
 using System.Threading.Tasks;
 
