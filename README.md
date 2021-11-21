@@ -33,6 +33,6 @@ HealthTracker is an end-to-end solution to worker safety. HealthTracker warns wo
 And of course physical access control system,
 
 [//]: # ()
-   [Monitoring Display]: <http://github.com>
+   [Monitoring Display]: https://github.com/outsidious/health-tracker-monitoring-dashboard
    [Server API]: <https://github.com/q00Dree/HealthTracker-Backend-WebAPI>
    [Mobile App]: <https://github.com/Sakerini/Health-Tracker-Android-MVVM>
